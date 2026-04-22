@@ -180,6 +180,19 @@ nav a:focus-visible {
   margin: .5rem 0;
   color: color-mix(in srgb, var(--page-text) 82%, #2b2b2b);
 }
+.order-link {
+  display: inline-block;
+  margin-top: .35rem;
+  padding: .45rem .8rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--page-accent) 40%, #b0b0b0);
+  color: color-mix(in srgb, var(--page-accent) 82%, #1f1f1f);
+  background: color-mix(in srgb, #ffffff 72%, transparent);
+}
+.order-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, .08);
+}
 
 .layout-c .image-wrap { max-height: 62vh; }
 .layout-c .content-wrap { border-top: 1px solid rgba(0,0,0,.1); }
