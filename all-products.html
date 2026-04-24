@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YP Crafts | 所有作品</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    .gallery-shell {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 0 2.5rem;
+    }
+
+    .gallery-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem 1.6rem;
+    }
+
+    .gallery-header h2 { margin: 0; font-size: 1.4rem; }
+
+    .back-link {
+      font-size: .85rem;
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .back-link:hover { color: var(--ink); }
+
+    /* ── 滑動軌道 ── */
+    .slider-track {
+      display: flex;
+      gap: 1.6rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      /* 左右留白讓第一張/最後一張也能置中 */
+      padding: 2.5rem calc(50% - 155px) 2.5rem;
+      scrollbar-width: none;
+      align-items: center;
+    }
+    .slider-track::-webkit-scrollbar { display: none; }
+
+    /* ── 卡片基本樣式 ── */
+    .slider-card {
+      flex: 0 0 280px;
+      scroll-snap-align: center;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #fff;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      /* 預設縮小 + 半透明 */
+      transform: scale(0.82);
+      opacity: 0.55;
+      transition: transform .35s ease, opacity .35s ease, box-shadow .35s ease;
+      cursor: pointer;
+      will-change: transform, opacity;
+    }
+
+    /* 焦點卡片：放大、全不透明、陰影 */
+    .slider-card.is-active {
+      transform: scale(1.2);
+      opacity: 1;
+      box-shadow: 0 18px 40px rgba(0,0,0,.13);
+    }
+
+    .slider-card img {
+      width: 84%;
+      margin: 1.1rem auto 0;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      border-radius: 14px;
+      display: block;
+    }
+
+    .slider-card .card-meta {
+      padding: 1rem 1.1rem 1.2rem;
+    }
+
+    .slider-card .card-meta h3 {
+      margin: 0;
+      font-size: .95rem;
+      line-height: 1.5;
+    }
+
+    /* ── 導覽點 ── */
+    .slider-dots {
+      display: flex;
+      gap: .45rem;
+      justify-content: center;
+      padding-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .slider-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--line);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: background .2s, width .2s, border-radius .2s;
+    }
+
+    .slider-dot.active {
+      background: var(--ink);
+      width: 20px;
+      border-radius: 3px;
+    }
+
+    /* ── 箭頭 ── */
+    .slider-nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding-top: 1.2rem;
+    }
+
+    .slider-arrow {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1.5px solid var(--line);
+      background: #fff;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .15s, border-color .15s;
+      line-height: 1;
+    }
+
+    .slider-arrow:hover {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html">
+        <img src="images/7877A391-6CB6-4B10-8B7E-826D02F5E8BB.jpg" alt="YP Crafts logo">
+        <span>YP Crafts</span>
+      </a>
+      <nav>
+        <a class="brand" href="about.html">About</a>
+        <div class="social-links nav-social">
+          <a class="social-facebook" href="https://www.facebook.com/profile.php?id=61587140589083" target="_blank" rel="noopener noreferrer" aria-label="Facebook｜Hand YP">
+            <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073c0 6.019 4.388 11.01 10.125 11.927v-8.437H7.078v-3.49h3.047V9.413c0-3.021 1.792-4.688 4.533-4.688 1.313 0 2.686.236 2.686.236v2.969h-1.514c-1.49 0-1.955.929-1.955 1.882v2.261h3.328l-.532 3.49h-2.796V24C19.612 23.083 24 18.092 24 12.073z"/>
+            </svg>
+          </a>
+          <a class="social-instagram" href="https://www.instagram.com/yphand2026/" target="_blank" rel="noopener noreferrer" aria-label="Instagram｜@yphand2026">
+            <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.75A4 4 0 0 0 3.75 7.75v8.5a4 4 0 0 0 4 4h8.5a4 4 0 0 0 4-4v-8.5a4 4 0 0 0-4-4h-8.5zm8.88 1.62a1.13 1.13 0 1 1 0 2.26 1.13 1.13 0 0 1 0-2.26zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.75a3.25 3.25 0 1 0 0 6.5 3.25 3.25 0 0 0 0-6.5z"/>
+            </svg>
+          </a>
+          <div class="line-qrcode">
+            <img src="images/E2AC1DAE-8493-42A7-BA7E-186BBD5DBB44.png" alt="LINE QR Code">
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="gallery-shell">
+    <div class="gallery-header">
+      <h2>所有作品</h2>
+      <a class="back-link" href="index.html">← 返回首頁</a>
+    </div>
+
+    <div class="slider-track" id="sliderTrack">
+      <a class="slider-card tone-gold" href="products/product-01.html">
+        <img src="assets/images/product-01.jpg" alt="作品 01">
+        <div class="card-meta"><h3>作品 01｜刺裡藏花，永恆綻放</h3></div>
+      </a>
+      <a class="slider-card tone-mist" href="products/product-02.html">
+        <img src="assets/images/product-02.jpg" alt="作品 02">
+        <div class="card-meta"><h3>作品 02｜永遠面向陽光</h3></div>
+      </a>
+      <a class="slider-card tone-ocean" href="products/product-06.html">
+        <img src="assets/images/product-06.jpg" alt="作品 03">
+        <div class="card-meta"><h3>作品 03｜彼岸，此刻</h3></div>
+      </a>
+      <a class="slider-card tone-berry" href="products/product-07.html">
+        <img src="assets/images/product-07.jpg" alt="作品 04">
+        <div class="card-meta"><h3>作品 04｜莓果輕甜</h3></div>
+      </a>
+      <a class="slider-card tone-gold" href="products/product-09.html">
+        <img src="assets/images/product-09.jpg" alt="作品 05">
+        <div class="card-meta"><h3>作品 05｜暖金晨光</h3></div>
+      </a>
+      <a class="slider-card tone-forest" href="products/product-03.html">
+        <img src="assets/images/product-03.jpg" alt="作品 06">
+        <div class="card-meta"><h3>作品 06｜森林氧感</h3></div>
+      </a>
+      <a class="slider-card tone-night" href="products/product-04.html">
+        <img src="assets/images/product-04.jpg" alt="作品 07">
+        <div class="card-meta"><h3>作品 07｜藍夜藝廊</h3></div>
+      </a>
+      <a class="slider-card tone-mono" href="products/product-08.html">
+        <img src="assets/images/product-08.jpg" alt="作品 08">
+        <div class="card-meta"><h3>作品 08｜黑白極簡</h3></div>
+      </a>
+      <a class="slider-card tone-cream" href="products/product-05.html">
+        <img src="assets/images/product-05.jpg" alt="作品 09">
+        <div class="card-meta"><h3>作品 09｜奶油柔和</h3></div>
+      </a>
+      <a class="slider-card tone-mist" href="products/product-10.html">
+        <img src="assets/images/product-10.jpg" alt="作品 10">
+        <div class="card-meta"><h3>作品 10｜青霧留白</h3></div>
+      </a>
+      <a class="slider-card tone-forest" href="products/product-11.html">
+        <img src="assets/images/product-11.jpg" alt="作品 11">
+        <div class="card-meta"><h3>作品 11｜森林氧感</h3></div>
+      </a>
+      <a class="slider-card tone-night" href="products/product-12.html">
+        <img src="assets/images/product-12.jpg" alt="作品 12">
+        <div class="card-meta"><h3>作品 12｜藍夜藝廊</h3></div>
+      </a>
+      <a class="slider-card tone-cream" href="products/product-13.html">
+        <img src="assets/images/product-13.jpg" alt="作品 13">
+        <div class="card-meta"><h3>作品 13｜奶油柔和</h3></div>
+      </a>
+      <a class="slider-card tone-ocean" href="products/product-14.html">
+        <img src="assets/images/product-14.jpg" alt="作品 14">
+        <div class="card-meta"><h3>作品 14｜海鹽清透</h3></div>
+      </a>
+      <a class="slider-card tone-berry" href="products/product-15.html">
+        <img src="assets/images/product-15.jpg" alt="作品 15">
+        <div class="card-meta"><h3>作品 15｜莓果輕甜</h3></div>
+      </a>
+      <a class="slider-card tone-mono" href="products/product-16.html">
+        <img src="assets/images/product-16.jpg" alt="作品 16">
+        <div class="card-meta"><h3>作品 16｜黑白極簡</h3></div>
+      </a>
+      <a class="slider-card tone-gold" href="products/product-17.html">
+        <img src="assets/images/product-17.jpg" alt="作品 17">
+        <div class="card-meta"><h3>作品 17｜暖金晨光</h3></div>
+      </a>
+      <a class="slider-card tone-mist" href="products/product-18.html">
+        <img src="assets/images/product-18.jpg" alt="作品 18">
+        <div class="card-meta"><h3>作品 18｜青霧留白</h3></div>
+      </a>
+      <a class="slider-card tone-forest" href="products/product-19.html">
+        <img src="assets/images/product-19.jpg" alt="作品 19">
+        <div class="card-meta"><h3>作品 19｜森林氧感</h3></div>
+      </a>
+      <a class="slider-card tone-night" href="products/product-20.html">
+        <img src="assets/images/product-20.jpg" alt="作品 20">
+        <div class="card-meta"><h3>作品 20｜藍夜藝廊</h3></div>
+      </a>
+      <a class="slider-card tone-cream" href="products/product-21.html">
+        <img src="assets/images/product-21.jpg" alt="作品 21">
+        <div class="card-meta"><h3>作品 21｜奶油柔和</h3></div>
+      </a>
+    </div>
+
+    <div class="slider-nav">
+      <button class="slider-arrow" id="prevBtn" aria-label="上一張">&#8592;</button>
+      <button class="slider-arrow" id="nextBtn" aria-label="下一張">&#8594;</button>
+    </div>
+
+    <div class="slider-dots" id="sliderDots"></div>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 YP Crafts. Handmade and Loved.</p>
+  </footer>
+
+  <script>
+    const track = document.getElementById('sliderTrack');
+    const dotsWrap = document.getElementById('sliderDots');
+    const cards = Array.from(track.querySelectorAll('.slider-card'));
+    let activeIndex = 0;
+
+    // 建立導覽點
+    cards.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'slider-dot';
+      dot.setAttribute('aria-label', `作品 ${String(i + 1).padStart(2, '0')}`);
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    });
+
+    const dots = Array.from(dotsWrap.querySelectorAll('.slider-dot'));
+
+    function goTo(index) {
+      activeIndex = Math.max(0, Math.min(index, cards.length - 1));
+      const card = cards[activeIndex];
+      const trackCenter = track.offsetWidth / 2;
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      track.scrollTo({ left: cardCenter - trackCenter, behavior: 'smooth' });
+      refresh();
+    }
+
+    function refresh() {
+      cards.forEach((c, i) => c.classList.toggle('is-active', i === activeIndex));
+      dots.forEach((d, i) => d.classList.toggle('active', i === activeIndex));
+    }
+
+    // 滾動時找最近中央的卡片
+    let scrollTimer;
+    track.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        const trackCenter = track.scrollLeft + track.offsetWidth / 2;
+        let closest = 0;
+        let minDist = Infinity;
+        cards.forEach((card, i) => {
+          const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+          const dist = Math.abs(cardCenter - trackCenter);
+          if (dist < minDist) { minDist = dist; closest = i; }
+        });
+        activeIndex = closest;
+        refresh();
+      }, 60);
+    }, { passive: true });
+
+    document.getElementById('prevBtn').addEventListener('click', () => goTo(activeIndex - 1));
+    document.getElementById('nextBtn').addEventListener('click', () => goTo(activeIndex + 1));
+
+    // 初始化
+    goTo(0);
+  </script>
+</body>
+</html>

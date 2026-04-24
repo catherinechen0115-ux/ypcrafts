@@ -506,6 +506,32 @@ nav a:focus-visible {
   box-shadow: 0 6px 14px rgba(0, 0, 0, .08);
 }
 
+.more-wrap {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.more-btn {
+  display: inline-block;
+  padding: .75rem 3rem;
+  border-radius: 999px;
+  border: none;
+  background: var(--ink);
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: .18em;
+  box-shadow: 0 6px 20px rgba(0,0,0,.18);
+  transition: background .18s, transform .2s, box-shadow .2s;
+}
+
+.more-btn:hover {
+  background: color-mix(in srgb, var(--ink) 80%, #000);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0,0,0,.22);
+}
+
 .layout-c .image-wrap {
   max-height: 62vh;
 }
