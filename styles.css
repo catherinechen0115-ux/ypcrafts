@@ -2,7 +2,7 @@
   --bg: #efefe4;
   --text: #232323;
   --muted: #5d5d5d;
-  --line: #d9d9cc;
+  --line: #d9d9cd;
 }
 
 * {
@@ -96,7 +96,21 @@ nav a:focus-visible {
 }
 
 .hero {
-  padding: 4.2rem 0 3rem;
+  padding: 0;
+}
+
+.hero-banner {
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.hero-banner-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 420px;
+  object-fit: cover;
 }
 
 .hero-grid {
