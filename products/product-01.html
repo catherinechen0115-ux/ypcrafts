@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
@@ -12,6 +12,70 @@
       --page-accent: #be8b2e;
       --page-text: #33250f;
     }
+
+    .product-subtitle {
+      font-size: 0.95rem;
+      letter-spacing: 0.15em;
+      color: var(--page-accent);
+      margin-top: -0.5rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .product-story {
+      margin-bottom: 1.4rem;
+      line-height: 2;
+    }
+
+    .product-story p {
+      margin: 0 0 0.6rem;
+    }
+
+    .product-tagline {
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--page-accent);
+      border-left: 3px solid var(--page-accent);
+      padding-left: 1rem;
+      margin: 2rem 0 1.8rem;
+      line-height: 1.9;
+    }
+
+    .product-meta {
+      font-size: 0.82rem;
+      color: color-mix(in srgb, var(--page-text) 60%, transparent);
+      list-style: none;
+      padding: 0;
+      margin: 0 0 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .product-meta li::before {
+      content: "— ";
+    }
+
+    .ref-photo-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('../assets/images/product-01-ref.png');
+      background-size: 110% auto;
+      background-position: left 30%;
+      background-repeat: no-repeat;
+      opacity: 0.50;
+      pointer-events: none;
+      z-index: 0;
+      border-radius: inherit;
+    }
+
+    .product-layout {
+      position: relative;
+    }
+
+    .product-layout > *:not(.ref-photo-bg) {
+      position: relative;
+      z-index: 1;
+    }
   </style>
 </head>
 <body class="product-page">
@@ -22,15 +86,40 @@
     </header>
 
     <article class="product-layout layout-a">
+      <div class="ref-photo-bg" aria-hidden="true"></div>
       <div class="image-wrap">
         <img src="../assets/images/product-01.jpg" alt="YP Crafts 作品 01">
       </div>
       <div class="content-wrap">
-        <h1>暖金晨光</h1>
-        <p>此頁以「暖金晨光」為視覺主軸，調整色調與排版節奏，讓畫面氛圍更貼近作品本身的材質與情緒。</p>
-        <p>從背景、留白、文字層級到內容欄位配置，皆依此商品做個別化設計，呈現更完整的品牌敘事感。</p>
-      <p><a class="order-link" href="https://forms.gle/MLxhTmpNDNap924R7" target="_blank" rel="noopener noreferrer">商品訂購</a></p>
-</div>
+        <h1>刺裡藏花，永恆綻放</h1>
+        <p class="product-subtitle">仙人球花 × 永生花</p>
+        <p><a class="order-link" href="https://forms.gle/MLxhTmpNDNap924R7" target="_blank" rel="noopener noreferrer">我要訂購</a></p>
+
+        <div class="product-story">
+          <p>仙人球，是最懂得忍耐的生命。它在荒漠裡沉默生長，不需要人的憐憫，也不需要豐沛的雨水。但當它決定開花，那一刻卻驚豔得讓人屏息——</p>
+          <p>粉白的花瓣，層層疊疊，如同少女展開的裙擺；鮮黃的花心，密密簇簇，像是藏不住的熱烈心跳。</p>
+          <p>它只開幾天。然後，就悄悄謝去，像不曾來過。</p>
+        </div>
+
+        <div class="product-story">
+          <p>我們不捨得讓它就這樣消失。</p>
+          <p>於是，將那朵最盛放的瞬間，用雙手，一片花瓣、一根花蕊，一針一線地重新召喚回來——</p>
+          <p>以絨布的柔，還原花瓣上那抹胭脂暈染；以細鐵絲的骨，撐起每一層張揚的姿態；以黃綠色的細蕊，複刻那些細如髮絲的生命紋路。</p>
+        </div>
+
+        <div class="product-story">
+          <p>這是永生花。不需要水，不怕時光，不會凋零。</p>
+          <p>它靜靜地停在盛開的那一秒，讓你每一次回頭，都還能看見——那個入冬時節，仙人球忘記了季節，依然盛開的倔強與溫柔。</p>
+        </div>
+
+        <p class="product-tagline">送給不需要太多照顧，卻值得被好好珍惜的人。<br>就像仙人球，也像你。</p>
+
+        <ul class="product-meta">
+          <li>系列：仙人球永生花</li>
+          <li>材質：絨布花瓣 × 鐵絲骨架 × 手染工藝</li>
+          <li>每一朵皆為純手工製作，細節略有差異，獨一無二</li>
+        </ul>
+      </div>
     </article>
   </main>
 </body>

@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
@@ -12,6 +12,70 @@
       --page-accent: #2b7fa4;
       --page-text: #17323f;
     }
+
+    .product-subtitle {
+      font-size: 0.95rem;
+      letter-spacing: 0.15em;
+      color: var(--page-accent);
+      margin-top: -0.5rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .product-story {
+      margin-bottom: 1.4rem;
+      line-height: 2;
+    }
+
+    .product-story p {
+      margin: 0 0 0.6rem;
+    }
+
+    .product-tagline {
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--page-accent);
+      border-left: 3px solid var(--page-accent);
+      padding-left: 1rem;
+      margin: 2rem 0 1.8rem;
+      line-height: 1.9;
+    }
+
+    .product-meta {
+      font-size: 0.82rem;
+      color: color-mix(in srgb, var(--page-text) 60%, transparent);
+      list-style: none;
+      padding: 0;
+      margin: 0 0 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .product-meta li::before {
+      content: "— ";
+    }
+
+    .ref-photo-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('../assets/images/product-06-ref.jpg');
+      background-size: cover;
+      background-position: center 35%;
+      background-repeat: no-repeat;
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: 0;
+      border-radius: inherit;
+    }
+
+    .product-layout {
+      position: relative;
+    }
+
+    .product-layout > *:not(.ref-photo-bg) {
+      position: relative;
+      z-index: 1;
+    }
   </style>
 </head>
 <body class="product-page">
@@ -22,15 +86,41 @@
     </header>
 
     <article class="product-layout layout-b">
+      <div class="ref-photo-bg" aria-hidden="true"></div>
       <div class="image-wrap">
         <img src="../assets/images/product-06.jpg" alt="YP Crafts 作品 06">
       </div>
       <div class="content-wrap">
-        <h1>海鹽清透</h1>
-        <p>此頁以「海鹽清透」為視覺主軸，調整色調與排版節奏，讓畫面氛圍更貼近作品本身的材質與情緒。</p>
-        <p>從背景、留白、文字層級到內容欄位配置，皆依此商品做個別化設計，呈現更完整的品牌敘事感。</p>
-      <p><a class="order-link" href="https://forms.gle/MLxhTmpNDNap924R7" target="_blank" rel="noopener noreferrer">商品訂購</a></p>
-</div>
+        <h1>彼岸，此刻</h1>
+        <p class="product-subtitle">彼岸花 × 永生花｜紅 · 紫 雙色</p>
+        <p><a class="order-link" href="https://forms.gle/MLxhTmpNDNap924R7" target="_blank" rel="noopener noreferrer">我要訂購</a></p>
+
+        <div class="product-story">
+          <p>彼岸花，有另一個名字叫做「曼珠沙華」。</p>
+          <p>傳說它生長在三途河畔，花葉永不相見——花開時葉已落，葉茂時花已謝。它的美，從來帶著一種錯過的哀愁，像兩個人在不同的時間愛上了彼此，卻永遠無法相遇。</p>
+          <p>細長的花絲如煙絲般向四方伸展，每一根都輕得像在說再見。</p>
+        </div>
+
+        <div class="product-story">
+          <p>但我們，選擇讓它留下來。</p>
+          <p>以紙藝的精細，一瓣一絲重新摹寫那個向外伸展的姿態；以深紅，復刻烈焰般的執著；以淡紫，訴說另一種溫柔的告別。</p>
+          <p>紅色的是熱烈，紫色的是深情——兩朵並立，不再是彼岸的孤獨，而是此刻的相伴。</p>
+        </div>
+
+        <div class="product-story">
+          <p>這對永生花，讓花葉的遺憾，在你的手裡和解。</p>
+          <p>不需要等到彼岸，美，就在此刻。</p>
+        </div>
+
+        <p class="product-tagline">送給那些懂得，有些美正因為短暫才珍貴——<br>而現在，我們選擇讓它永遠留著。</p>
+
+        <ul class="product-meta">
+          <li>系列：彼岸花永生花｜雙色組</li>
+          <li>顏色：深紅 · 淡紫</li>
+          <li>材質：紙藝花瓣 × 鐵絲骨架 × 手工上色</li>
+          <li>每一朵皆為純手工製作，細節略有差異，獨一無二</li>
+        </ul>
+      </div>
     </article>
   </main>
 </body>

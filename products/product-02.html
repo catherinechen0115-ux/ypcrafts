@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
@@ -12,6 +12,70 @@
       --page-accent: #3f7d80;
       --page-text: #1f2f30;
     }
+
+    .product-subtitle {
+      font-size: 0.95rem;
+      letter-spacing: 0.15em;
+      color: var(--page-accent);
+      margin-top: -0.5rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .product-story {
+      margin-bottom: 1.4rem;
+      line-height: 2;
+    }
+
+    .product-story p {
+      margin: 0 0 0.6rem;
+    }
+
+    .product-tagline {
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--page-accent);
+      border-left: 3px solid var(--page-accent);
+      padding-left: 1rem;
+      margin: 2rem 0 1.8rem;
+      line-height: 1.9;
+    }
+
+    .product-meta {
+      font-size: 0.82rem;
+      color: color-mix(in srgb, var(--page-text) 60%, transparent);
+      list-style: none;
+      padding: 0;
+      margin: 0 0 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .product-meta li::before {
+      content: "— ";
+    }
+
+    .ref-photo-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('../assets/images/product-02-ref.jpg');
+      background-size: 100% auto;
+      background-position: center 30%;
+      background-repeat: no-repeat;
+      opacity: 0.5;
+      pointer-events: none;
+      z-index: 0;
+      border-radius: inherit;
+    }
+
+    .product-layout {
+      position: relative;
+    }
+
+    .product-layout > *:not(.ref-photo-bg) {
+      position: relative;
+      z-index: 1;
+    }
   </style>
 </head>
 <body class="product-page">
@@ -22,15 +86,41 @@
     </header>
 
     <article class="product-layout layout-b">
+      <div class="ref-photo-bg" aria-hidden="true"></div>
       <div class="image-wrap">
         <img src="../assets/images/product-02.jpg" alt="YP Crafts 作品 02">
       </div>
       <div class="content-wrap">
-        <h1>青霧留白</h1>
-        <p>此頁以「青霧留白」為視覺主軸，調整色調與排版節奏，讓畫面氛圍更貼近作品本身的材質與情緒。</p>
-        <p>從背景、留白、文字層級到內容欄位配置，皆依此商品做個別化設計，呈現更完整的品牌敘事感。</p>
-      <p><a class="order-link" href="https://forms.gle/MLxhTmpNDNap924R7" target="_blank" rel="noopener noreferrer">商品訂購</a></p>
-</div>
+        <h1>永遠面向陽光</h1>
+        <p class="product-subtitle">向日葵 × 永生花</p>
+        <p><a class="order-link" href="https://forms.gle/MLxhTmpNDNap924R7" target="_blank" rel="noopener noreferrer">我要訂購</a></p>
+
+        <div class="product-story">
+          <p>向日葵有一種固執——它永遠知道太陽在哪裡。</p>
+          <p>從破土的那天起，它就把整張臉朝向光，不管風怎麼吹，不管旁邊的花怎麼長，它只是轉過去，靜靜地，跟著那道光。</p>
+          <p>鮮黃的花瓣，像光本身長出了形狀；深褐的花心，密密實實，藏著幾千顆等待發芽的心事。</p>
+        </div>
+
+        <div class="product-story">
+          <p>但花季有盡頭。向日葵也有低頭的一天。</p>
+          <p>我們想把它抬頭的樣子留下來。</p>
+          <p>於是一片一片，用雙手重新塑造那個朝光的姿態——以橙金色絨布，鋪出花瓣蓬張的弧度；以深咖啡絨線，一圈一圈編出花心的厚實與溫度；以翠綠絨莖，撐起整朵花挺拔的身軀。</p>
+        </div>
+
+        <div class="product-story">
+          <p>這朵永生花，不再需要追逐太陽。</p>
+          <p>它就是光的本身，停在這裡，不枯，不謝，不低頭。</p>
+          <p>無論放在窗邊、書桌，還是你最常低頭的地方——抬起眼，它都在，提醒你，那個面向陽光的人，是你自己。</p>
+        </div>
+
+        <p class="product-tagline">送給每一個曾經低頭，但還是會再抬起來的你。</p>
+
+        <ul class="product-meta">
+          <li>系列：向日葵永生花</li>
+          <li>材質：絨布花瓣 × 絨線花心 × 鐵絲骨架 × 手染工藝</li>
+          <li>每一朵皆為純手工製作，細節略有差異，獨一無二</li>
+        </ul>
+      </div>
     </article>
   </main>
 </body>
