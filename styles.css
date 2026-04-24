@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Pacifico&display=swap');
+
 :root {
   --bg: #efefe4;
   --text: #232323;
@@ -58,6 +60,11 @@ a {
   align-items: center;
   gap: .6rem;
   font-weight: 700;
+}
+
+.brand span {
+  font-size: 1.4rem;
+  letter-spacing: .05em;
 }
 
 .brand img {
@@ -188,6 +195,8 @@ nav a:focus-visible {
 .section h2 {
   margin: 0 0 .8rem;
   font-size: clamp(1.4rem, 3vw, 2rem);
+  font-family: "Zen Maru Gothic", serif;
+  letter-spacing: .12em;
 }
 
 .section-lead {
@@ -389,6 +398,9 @@ nav a:focus-visible {
   text-align: center;
   color: var(--muted);
   padding: 1.2rem;
+  font-family: "Pacifico", cursive;
+  font-size: 1rem;
+  letter-spacing: .04em;
 }
 
 .product-page {
