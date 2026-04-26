@@ -24,9 +24,11 @@
             <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.75A4 4 0 0 0 3.75 7.75v8.5a4 4 0 0 0 4 4h8.5a4 4 0 0 0 4-4v-8.5a4 4 0 0 0-4-4h-8.5zm8.88 1.62a1.13 1.13 0 1 1 0 2.26 1.13 1.13 0 0 1 0-2.26zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.75a3.25 3.25 0 1 0 0 6.5 3.25 3.25 0 0 0 0-6.5z"/>
           </svg>
         </a>
-        <div class="line-qrcode">
-          <img src="${r}images/E2AC1DAE-8493-42A7-BA7E-186BBD5DBB44.png" alt="LINE QR Code">
-        </div>
+        <a href="https://lin.ee/YLwzHWKr" target="_blank" rel="noopener noreferrer" aria-label="LINE｜YP Crafts">
+          <div class="line-qrcode">
+            <img src="${r}images/E2AC1DAE-8493-42A7-BA7E-186BBD5DBB44.png" alt="LINE QR Code">
+          </div>
+        </a>
       </div>
     </nav>
   </div>
