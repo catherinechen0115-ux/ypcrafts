@@ -1,7 +1,7 @@
 /* 共用元件注入 */
 (function () {
-  const inProducts = window.location.pathname.includes('/products/');
-  const r = inProducts ? '../' : '';
+  const inSubdir = window.location.pathname.includes('/products/') || window.location.pathname.includes('/categories/');
+  const r = inSubdir ? '../' : '';
 
   const components = {
 

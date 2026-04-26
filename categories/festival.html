@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YP Crafts | 節慶系列</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .category-hero {
+      text-align: center;
+      padding: 3rem 1rem 2rem;
+    }
+    .category-hero .icon { font-size: 3.5rem; line-height: 1; }
+    .category-hero h1 {
+      font-family: "Zen Maru Gothic", serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      letter-spacing: .12em;
+      margin-top: .6rem;
+    }
+    .category-hero p {
+      color: var(--muted);
+      margin-top: .6rem;
+      font-size: .95rem;
+    }
+    .promo-block {
+      margin: 0 auto 3rem;
+      max-width: 900px;
+    }
+    .promo-block iframe {
+      width: 100%;
+      height: 85vh;
+      border: none;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.1);
+      display: block;
+    }
+    .promo-label {
+      text-align: center;
+      font-size: .8rem;
+      letter-spacing: .15em;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+    .products-section h2 {
+      font-family: "Zen Maru Gothic", serif;
+      letter-spacing: .12em;
+      margin-bottom: 1.4rem;
+      font-size: 1.3rem;
+      padding: 0 1rem;
+    }
+
+    .slider-track {
+      display: flex;
+      gap: 1.6rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 2.5rem calc(50% - 155px) 2.5rem;
+      scrollbar-width: none;
+      align-items: center;
+    }
+    .slider-track::-webkit-scrollbar { display: none; }
+
+    .slider-card {
+      flex: 0 0 280px;
+      scroll-snap-align: center;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #fff;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transform: scale(0.82);
+      opacity: 0.55;
+      transition: transform .35s ease, opacity .35s ease, box-shadow .35s ease;
+      cursor: pointer;
+      will-change: transform, opacity;
+    }
+
+    .slider-card.is-active {
+      transform: scale(1.2);
+      opacity: 1;
+      box-shadow: 0 18px 40px rgba(0,0,0,.13);
+    }
+
+    .slider-card img {
+      width: 84%;
+      margin: 1.1rem auto 0;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      border-radius: 14px;
+      display: block;
+    }
+
+    .slider-card .card-meta {
+      padding: 1rem 1.1rem 1.2rem;
+    }
+
+    .slider-card .card-meta h3 {
+      margin: 0;
+      font-size: .95rem;
+      line-height: 1.5;
+    }
+
+    .slider-dots {
+      display: flex;
+      gap: .45rem;
+      justify-content: center;
+      padding-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .slider-dot {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: transparent;
+      border: 1.5px solid var(--line);
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s, border-color .2s, color .2s, transform .2s;
+    }
+
+    .slider-dot.active {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: #fff;
+      transform: scale(1.15);
+    }
+
+    .slider-nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding-top: 1.2rem;
+    }
+
+    .slider-arrow {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      border: 1.5px solid var(--line);
+      background: #fff;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .15s, border-color .15s;
+      line-height: 1;
+    }
+
+    .slider-arrow:hover {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <main class="container" style="padding-top:1.5rem; padding-bottom:4rem;">
+    <div class="category-hero">
+      <div class="icon">🎉</div>
+      <h1>節慶系列</h1>
+      <p>聖誕、新年、萬聖，為每個節日增添手作溫度</p>
+    </div>
+
+    <div class="promo-block">
+      <p class="promo-label">作品故事 · Story</p>
+      <iframe src="../promo-19.html" title="節慶手作製作過程" allowfullscreen></iframe>
+    </div>
+
+    <div class="products-section">
+      <h2>精選作品</h2>
+      <div class="slider-track" id="sliderTrack">
+        <a class="slider-card tone-forest" href="../products/product-19.html">
+          <img src="../assets/images/product-19.jpg" alt="作品 19">
+          <div class="card-meta"><h3>作品 19｜福星高照</h3></div>
+        </a>
+        <a class="slider-card tone-mono" href="../products/product-08.html">
+          <img src="../assets/images/product-08.jpg" alt="作品 08">
+          <div class="card-meta"><h3>作品 08｜黑白極簡</h3></div>
+        </a>
+        <a class="slider-card tone-night" href="../products/product-20.html">
+          <img src="../assets/images/product-20.jpg" alt="作品 20">
+          <div class="card-meta"><h3>作品 20｜藍夜藝廊</h3></div>
+        </a>
+        <a class="slider-card tone-cream" href="../products/product-21.html">
+          <img src="../assets/images/product-21.jpg" alt="作品 21">
+          <div class="card-meta"><h3>作品 21｜奶油柔和</h3></div>
+        </a>
+      </div>
+      <div class="slider-nav">
+        <button class="slider-arrow" id="prevBtn" aria-label="上一張">&#8592;</button>
+        <button class="slider-arrow" id="nextBtn" aria-label="下一張">&#8594;</button>
+      </div>
+      <div class="slider-dots" id="sliderDots"></div>
+      <div class="more-wrap" style="margin-top:1.8rem; text-align:center;">
+        <a class="more-btn" href="../all-products.html">查看更多作品</a>
+      </div>
+    </div>
+
+    <script>
+      const track = document.getElementById('sliderTrack');
+      const dotsWrap = document.getElementById('sliderDots');
+      const cards = Array.from(track.querySelectorAll('.slider-card'));
+      let activeIndex = 0;
+
+      cards.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'slider-dot';
+        dot.textContent = i + 1;
+        dot.addEventListener('click', () => goTo(i));
+        dotsWrap.appendChild(dot);
+      });
+
+      const dots = Array.from(dotsWrap.querySelectorAll('.slider-dot'));
+
+      function goTo(index) {
+        activeIndex = Math.max(0, Math.min(index, cards.length - 1));
+        const card = cards[activeIndex];
+        const trackCenter = track.offsetWidth / 2;
+        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+        track.scrollTo({ left: cardCenter - trackCenter, behavior: 'smooth' });
+        refresh();
+      }
+
+      function refresh() {
+        cards.forEach((c, i) => c.classList.toggle('is-active', i === activeIndex));
+        dots.forEach((d, i) => d.classList.toggle('active', i === activeIndex));
+      }
+
+      let scrollTimer;
+      track.addEventListener('scroll', () => {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => {
+          const trackCenter = track.scrollLeft + track.offsetWidth / 2;
+          let closest = 0, minDist = Infinity;
+          cards.forEach((card, i) => {
+            const dist = Math.abs(card.offsetLeft + card.offsetWidth / 2 - trackCenter);
+            if (dist < minDist) { minDist = dist; closest = i; }
+          });
+          activeIndex = closest;
+          refresh();
+        }, 60);
+      }, { passive: true });
+
+      document.getElementById('prevBtn').addEventListener('click', () => goTo(activeIndex - 1));
+      document.getElementById('nextBtn').addEventListener('click', () => goTo(activeIndex + 1));
+
+      goTo(0);
+    </script>
+  </main>
+
+  <div data-include="footer"></div>
+  <script src="../js/components.js"></script>
+</body>
+</html>
