@@ -1,0 +1,624 @@
+﻿<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YP Crafts｜刺裡藏花，永恆綻放</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;700&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #be8b2e;
+      --blush: #f4d8c8;
+      --cream: #fdf6ee;
+      --ink: #2a1a0a;
+      --muted: rgba(42,26,10,.45);
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      background: #efefe4;
+      font-family: "Zen Maru Gothic", serif;
+      overflow: hidden;
+      color: #2a1a0a;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── 舞台 ── */
+    #stage {
+      flex: 1;
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    /* ── 每一幕 ── */
+    .scene {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .8s ease;
+    }
+
+    .scene.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* ── 進度條 ── */
+    #progress-bar {
+      position: absolute; top: 0; left: 0;
+      height: 3px;
+      background: var(--gold);
+      transition: width .4s ease;
+      z-index: 100;
+    }
+
+    /* ── 控制按鈕 ── */
+    #controls {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      align-items: center;
+      padding: .8rem 0 1rem;
+      background: #efefe4;
+    }
+
+    .ctrl-btn {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(42,26,10,.2);
+      background: rgba(255,255,255,.6);
+      color: #2a1a0a;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+      transition: background .2s;
+    }
+    .ctrl-btn:hover { background: rgba(42,26,10,.08); }
+
+    #scene-dots {
+      display: flex;
+      gap: .5rem;
+      align-items: center;
+    }
+
+    .sdot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(42,26,10,.2);
+      transition: background .3s, transform .3s;
+      cursor: pointer;
+    }
+    .sdot.on {
+      background: var(--gold);
+      transform: scale(1.4);
+    }
+
+    /* ════════════════════════════════
+       幕 0 — 開場：仙人球花
+    ════════════════════════════════ */
+    #s0 { background: linear-gradient(160deg, #fdf6ee 0%, #f4e8d4 100%); }
+
+    .s0-photo {
+      width: min(360px, 80vw);
+      height: min(440px, 80vh);
+      border-radius: 50% 50% 46% 54% / 48% 52% 48% 52%;
+      background: url('assets/images/product-01-ref1.jpg') center 30% / 125% auto no-repeat;
+      animation: breathe 5s ease-in-out infinite;
+      box-shadow: 0 0 80px rgba(190,139,46,.35);
+    }
+
+    @keyframes breathe {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+
+    .s0-caption {
+      margin-top: 2rem;
+      text-align: center;
+      animation: fadeUp 1.2s ease both;
+      animation-delay: .6s;
+    }
+
+    .s0-caption .en {
+      font-size: .8rem;
+      letter-spacing: .25em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .s0-caption h1 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 700;
+      margin-top: .4rem;
+      line-height: 1.4;
+    }
+
+    /* ════════════════════════════════
+       幕 1 — 文字：它只開幾天
+    ════════════════════════════════ */
+    #s1 {
+      background: radial-gradient(ellipse at center, #fff8f0 0%, #efefe4 100%);
+    }
+
+    .prose {
+      max-width: 520px;
+      text-align: center;
+      padding: 0 2rem;
+    }
+
+    .prose .line {
+      display: block;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      line-height: 2;
+      opacity: 0;
+      transform: translateY(18px);
+    }
+
+    #s1.active .line:nth-child(1) { animation: fadeUp .8s .3s ease forwards; }
+    #s1.active .line:nth-child(2) { animation: fadeUp .8s .9s ease forwards; }
+    #s1.active .line:nth-child(3) { animation: fadeUp .8s 1.5s ease forwards; }
+
+    .prose .accent { color: var(--gold); font-weight: 700; }
+
+    /* ════════════════════════════════
+       幕 2 — 工序：鐵絲骨架
+    ════════════════════════════════ */
+    #s2 { background: #f7f2ea; }
+
+    .wire-stage {
+      position: relative;
+      width: 280px;
+      height: 280px;
+    }
+
+    .wire-stem {
+      position: absolute;
+      left: 50%; top: 50%;
+      width: 3px;
+      background: linear-gradient(to top, #5a8a5a, #3d6e3d);
+      height: 0;
+      transform-origin: bottom center;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    #s2.active .wire-stem {
+      animation: growStem 1s .3s ease forwards;
+    }
+
+    @keyframes growStem {
+      to { height: 120px; top: calc(50% - 120px); }
+    }
+
+    .wire-petal {
+      position: absolute;
+      left: 50%; top: 50%;
+      width: 14px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(to top, #c0a080, #e8d0b0);
+      transform-origin: bottom center;
+      opacity: 0;
+      transform: translateX(-50%) rotate(var(--r)) scaleY(0);
+    }
+
+    #s2.active .wire-petal {
+      animation: bloomPetal .5s ease forwards;
+      animation-delay: calc(var(--i) * 0.12s + 1s);
+    }
+
+    @keyframes bloomPetal {
+      to { opacity: 1; transform: translateX(-50%) rotate(var(--r)) scaleY(1) translateY(-50px); }
+    }
+
+    .step-label {
+      margin-top: 2.5rem;
+      text-align: center;
+      opacity: 0;
+    }
+
+    #s2.active .step-label { animation: fadeUp .8s 2.2s ease forwards; }
+
+    .step-label .num {
+      font-size: .75rem;
+      letter-spacing: .2em;
+      color: var(--gold);
+    }
+
+    .step-label h2 {
+      font-size: 1.4rem;
+      margin-top: .3rem;
+    }
+
+    .step-label p {
+      font-size: .88rem;
+      color: rgba(42,26,10,.55);
+      margin-top: .4rem;
+      line-height: 1.8;
+    }
+
+    /* ════════════════════════════════
+       幕 3 — 工序：絨布剪裁
+    ════════════════════════════════ */
+    #s3 { background: #faf2f5; }
+
+    .fabric-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+      justify-content: center;
+      max-width: 320px;
+    }
+
+    .fabric-swatch {
+      width: 70px; height: 70px;
+      border-radius: 50% 50% 46% 54% / 55% 45% 55% 45%;
+      opacity: 0;
+      transform: scale(0.3) rotate(-20deg);
+    }
+
+    #s3.active .fabric-swatch {
+      animation: popIn .5s ease forwards;
+      animation-delay: calc(var(--i) * 0.15s + .4s);
+    }
+
+    @keyframes popIn {
+      to { opacity: 1; transform: scale(1) rotate(0deg); }
+    }
+
+    #s3.active .step-label { animation: fadeUp .8s 1.8s ease forwards; }
+
+    /* ════════════════════════════════
+       幕 4 — 工序：手染上色
+    ════════════════════════════════ */
+    #s4 { background: #f5f2fa; }
+
+    .dye-circle {
+      position: relative;
+      width: 240px; height: 240px;
+    }
+
+    .dye-ring {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0;
+    }
+
+    #s4.active .dye-ring {
+      animation: dyeSpread ease forwards;
+      animation-duration: var(--dur);
+      animation-delay: var(--del);
+    }
+
+    @keyframes dyeSpread {
+      0% { opacity: 0; transform: scale(0); }
+      60% { opacity: .7; }
+      100% { opacity: .25; transform: scale(1); }
+    }
+
+    #s4.active .step-label { animation: fadeUp .8s 2.2s ease forwards; }
+
+    /* ════════════════════════════════
+       幕 5 — 成品揭曉
+    ════════════════════════════════ */
+    #s5 { background: #fdf6ee; }
+
+    .reveal-wrap {
+      position: relative;
+      width: min(340px, 80vw);
+    }
+
+    .reveal-photo {
+      width: 100%;
+      border-radius: 50% 50% 46% 54% / 48% 52% 48% 52%;
+      box-shadow: 0 0 100px rgba(190,139,46,.5);
+      opacity: 0;
+      transform: scale(.7);
+    }
+
+    #s5.active .reveal-photo {
+      animation: revealPhoto 1.2s .4s cubic-bezier(.34,1.56,.64,1) forwards;
+    }
+
+    @keyframes revealPhoto {
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: 0;
+    }
+
+    #s5.active .sparkle {
+      animation: sparkleAnim .8s ease forwards;
+      animation-delay: calc(var(--i) * .18s + 1.2s);
+    }
+
+    @keyframes sparkleAnim {
+      0% { opacity: 0; transform: scale(0) translate(0,0); }
+      50% { opacity: 1; }
+      100% { opacity: 0; transform: scale(1.5) translate(var(--tx), var(--ty)); }
+    }
+
+    #s5.active .step-label { animation: fadeUp .8s 1s ease forwards; }
+
+    .step-label .tagline {
+      font-size: .9rem;
+      color: var(--gold);
+      font-style: italic;
+      margin-top: .6rem;
+    }
+
+    /* ════════════════════════════════
+       幕 6 — 結尾 CTA
+    ════════════════════════════════ */
+    #s6 {
+      background: radial-gradient(ellipse at center, #fdf6ee 0%, #efefe4 100%);
+    }
+
+    .cta-wrap {
+      text-align: center;
+      padding: 0 2rem;
+    }
+
+    .cta-wrap .logo-text {
+      font-size: .75rem;
+      letter-spacing: .3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      opacity: 0;
+    }
+
+    .cta-wrap h2 {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      margin-top: .8rem;
+      line-height: 1.4;
+      opacity: 0;
+    }
+
+    .cta-wrap p {
+      margin-top: 1rem;
+      font-size: .95rem;
+      color: rgba(42,26,10,.55);
+      line-height: 1.9;
+      opacity: 0;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: .8rem 2.6rem;
+      border-radius: 999px;
+      background: var(--gold);
+      color: #2a1a0a;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      opacity: 0;
+      box-shadow: 0 6px 24px rgba(190,139,46,.45);
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(190,139,46,.55);
+    }
+
+    #s6.active .logo-text { animation: fadeUp .8s .3s ease forwards; }
+    #s6.active h2         { animation: fadeUp .8s .8s ease forwards; }
+    #s6.active p          { animation: fadeUp .8s 1.2s ease forwards; }
+    #s6.active .cta-btn   { animation: fadeUp .8s 1.7s ease forwards; }
+
+    /* ── 共用動畫 ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── 鍵盤提示 ── */
+    #hint {
+      position: fixed;
+      top: 1.2rem;
+      right: 1.4rem;
+      font-size: .72rem;
+      color: rgba(42,26,10,.3);
+      letter-spacing: .08em;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div id="hint">← → 切換 · Space 播放</div>
+
+<div id="stage">
+
+  <!-- 幕 0：開場 -->
+  <section class="scene active" id="s0">
+    <div class="s0-photo"></div>
+    <div class="s0-caption">
+      <span class="en">YP Crafts × Preserved Flower</span>
+      <h1>刺裡藏花<br>永恆綻放</h1>
+    </div>
+  </section>
+
+  <!-- 幕 1：它只開幾天 -->
+  <section class="scene" id="s1">
+    <div class="prose">
+      <span class="line">仙人球，只開幾天。</span>
+      <span class="line">然後，悄悄謝去，<span class="accent">像不曾來過。</span></span>
+      <span class="line">我們，不捨得讓它消失。</span>
+    </div>
+  </section>
+
+  <!-- 幕 2：鐵絲骨架 -->
+  <section class="scene" id="s2">
+    <div class="wire-stage">
+      <div class="wire-stem"></div>
+      <!-- 12 根花瓣 -->
+      <div class="wire-petal" style="--r:0deg;   --i:0"></div>
+      <div class="wire-petal" style="--r:30deg;  --i:1"></div>
+      <div class="wire-petal" style="--r:60deg;  --i:2"></div>
+      <div class="wire-petal" style="--r:90deg;  --i:3"></div>
+      <div class="wire-petal" style="--r:120deg; --i:4"></div>
+      <div class="wire-petal" style="--r:150deg; --i:5"></div>
+      <div class="wire-petal" style="--r:180deg; --i:6"></div>
+      <div class="wire-petal" style="--r:210deg; --i:7"></div>
+      <div class="wire-petal" style="--r:240deg; --i:8"></div>
+      <div class="wire-petal" style="--r:270deg; --i:9"></div>
+      <div class="wire-petal" style="--r:300deg; --i:10"></div>
+      <div class="wire-petal" style="--r:330deg; --i:11"></div>
+    </div>
+    <div class="step-label">
+      <span class="num">STEP 01</span>
+      <h2>細鐵絲骨架</h2>
+      <p>以鐵絲為骨，一根根彎折成形<br>撐起每一層花瓣的張揚姿態</p>
+    </div>
+  </section>
+
+  <!-- 幕 3：絨布剪裁 -->
+  <section class="scene" id="s3">
+    <div class="fabric-wrap">
+      <div class="fabric-swatch" style="--i:0; background:#f4c8c8;"></div>
+      <div class="fabric-swatch" style="--i:1; background:#f9e4d4;"></div>
+      <div class="fabric-swatch" style="--i:2; background:#fdf0e0;"></div>
+      <div class="fabric-swatch" style="--i:3; background:#e8c8d8;"></div>
+      <div class="fabric-swatch" style="--i:4; background:#f0d8c0;"></div>
+      <div class="fabric-swatch" style="--i:5; background:#fce8e0;"></div>
+      <div class="fabric-swatch" style="--i:6; background:#f5dbc8;"></div>
+      <div class="fabric-swatch" style="--i:7; background:#eddcc8;"></div>
+    </div>
+    <div class="step-label">
+      <span class="num">STEP 02</span>
+      <h2>絨布剪裁</h2>
+      <p>選取最柔軟的絨布<br>一片一片裁出花瓣的弧度</p>
+    </div>
+  </section>
+
+  <!-- 幕 4：手染上色 -->
+  <section class="scene" id="s4">
+    <div class="dye-circle">
+      <div class="dye-ring" style="inset:0;          background:radial-gradient(circle,#f4c8c8,transparent);  --dur:1.2s; --del:.3s;"></div>
+      <div class="dye-ring" style="inset:20px;       background:radial-gradient(circle,#f0a0a0,transparent);  --dur:1.0s; --del:.7s;"></div>
+      <div class="dye-ring" style="inset:50px;       background:radial-gradient(circle,#e87878,transparent);  --dur:.9s;  --del:1.1s;"></div>
+      <div class="dye-ring" style="inset:80px;       background:radial-gradient(circle,#ffd080,transparent);  --dur:.8s;  --del:1.4s;"></div>
+      <div class="dye-ring" style="inset:100px;      background:radial-gradient(circle,#ffe8a0,transparent);  --dur:.7s;  --del:1.7s;"></div>
+    </div>
+    <div class="step-label">
+      <span class="num">STEP 03</span>
+      <h2>手工染色</h2>
+      <p>以胭脂暈染花瓣邊緣<br>還原那一抹粉白的嬌嫩</p>
+    </div>
+  </section>
+
+  <!-- 幕 5：成品揭曉 -->
+  <section class="scene" id="s5">
+    <div class="reveal-wrap">
+      <img class="reveal-photo" src="assets/images/product-01.jpg" alt="永生花成品">
+      <!-- 光點 -->
+      <div class="sparkle" style="--i:0; top:10%; left:20%; --tx:-20px; --ty:-30px;"></div>
+      <div class="sparkle" style="--i:1; top:5%;  left:70%; --tx:15px;  --ty:-25px;"></div>
+      <div class="sparkle" style="--i:2; top:80%; left:15%; --tx:-18px; --ty:20px;"></div>
+      <div class="sparkle" style="--i:3; top:85%; left:78%; --tx:22px;  --ty:18px;"></div>
+      <div class="sparkle" style="--i:4; top:40%; left:5%;  --tx:-28px; --ty:0px;"></div>
+      <div class="sparkle" style="--i:5; top:35%; left:92%; --tx:25px;  --ty:0px;"></div>
+    </div>
+    <div class="step-label">
+      <span class="num">COMPLETED</span>
+      <h2>永生花，完成</h2>
+      <p class="tagline">不需要水，不怕時光，不會凋零。</p>
+    </div>
+  </section>
+
+  <!-- 幕 6：CTA -->
+  <section class="scene" id="s6">
+    <div class="cta-wrap">
+      <span class="logo-text">YP Crafts — Handmade and Loved</span>
+      <h2>值得送給被珍惜的你/妳</h2>
+      <p>每一朵皆為純手工製作<br>細節略有差異，獨一無二</p>
+      <a class="cta-btn" href="https://forms.gle/MLxhTmpNDNap924R7" target="_blank" rel="noopener noreferrer">我要訂購</a>
+    </div>
+  </section>
+
+</div><!-- #stage -->
+
+<!-- 控制列 -->
+<div id="controls">
+  <button class="ctrl-btn" id="prevBtn">&#8592;</button>
+  <div id="scene-dots"></div>
+  <button class="ctrl-btn" id="nextBtn">&#8594;</button>
+</div>
+
+<script>
+  const scenes = Array.from(document.querySelectorAll('.scene'));
+  const total = scenes.length;
+  const bar = document.getElementById('progress-bar');
+  const dotsWrap = document.getElementById('scene-dots');
+  let cur = 0;
+  let timer;
+
+  // 建立點點
+  scenes.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'sdot' + (i === 0 ? ' on' : '');
+    d.addEventListener('click', () => go(i));
+    dotsWrap.appendChild(d);
+  });
+
+  const dots = Array.from(dotsWrap.querySelectorAll('.sdot'));
+
+  function go(idx) {
+    scenes[cur].classList.remove('active');
+    cur = (idx + total) % total;
+    scenes[cur].classList.add('active');
+    dots.forEach((d, i) => d.classList.toggle('on', i === cur));
+    bar.style.width = ((cur + 1) / total * 100) + '%';
+    resetTimer();
+  }
+
+  function resetTimer() {
+    clearTimeout(timer);
+    timer = setTimeout(() => go(cur + 1), 5000);
+  }
+
+  document.getElementById('prevBtn').addEventListener('click', () => go(cur - 1));
+  document.getElementById('nextBtn').addEventListener('click', () => go(cur + 1));
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') go(cur + 1);
+    if (e.key === 'ArrowLeft') go(cur - 1);
+  });
+
+  // 觸控滑動
+  let tx = 0;
+  document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; });
+  document.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 50) go(cur + (dx < 0 ? 1 : -1));
+  });
+
+  resetTimer();
+</script>
+</body>
+</html>
